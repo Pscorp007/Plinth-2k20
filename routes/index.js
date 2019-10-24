@@ -39,7 +39,7 @@ router.get('/competitions', Verify.verifyOrdinaryUser, function (req, res, next)
 
     if (req.decoded.sub === "") {
         isLoggedIn = false;
-        res.render('competitions', {
+        res.render('competitioned', {
             "page": 'competitions',
             "isLoggedIn": isLoggedIn,
 
@@ -54,7 +54,7 @@ router.get('/competitions', Verify.verifyOrdinaryUser, function (req, res, next)
                 return done(err);
             // check to see if theres already a user with that email
             if (user) {
-                res.render('competitions', {
+                res.render('competitioned', {
                     "page": 'competitions',
                     "isLoggedIn": isLoggedIn,
                     "user": user,
