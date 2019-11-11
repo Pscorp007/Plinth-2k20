@@ -166,6 +166,7 @@ router.post('/user_register_complete', Verify.verifyOrdinaryUser, function (req,
 
 
 router.get('/logout', Verify.verifyOrdinaryUser, function (req, res) {
+    req.logout();
     res.clearCookie("access-token");
     res.redirect('/');
 });

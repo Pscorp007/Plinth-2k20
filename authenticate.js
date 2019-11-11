@@ -2,7 +2,7 @@ var passport = require('passport');
 var FacebookStrategy = require('passport-facebook').Strategy;
 var FacebookValidate = require('passport-facebook-token');
 var GoogleValidate = require('passport-google-token').Strategy;
-var GoogleStrategy = require('passport-google-oauth').OAuth2Strategy;
+var GoogleStrategy = require('passport-google-oauth20').Strategy;
 var User = require('./schema/user');
 var configAuth = require('./config/auth');
  
@@ -21,6 +21,8 @@ exports.google = passport.use(new GoogleStrategy({
 	clientID: configAuth.googleAuth.clientID,
 	clientSecret: configAuth.googleAuth.clientSecret,
 	callbackURL: configAuth.googleAuth.callbackURL,
+	//scope: "https://www.googleapis.com/auth/plus.login",
+        // passReqToCallback : true // allows us to pass back the entire request to the callback
 },
 	function (accessToken, refreshToken, profile, done) {
 		console.log(profile);

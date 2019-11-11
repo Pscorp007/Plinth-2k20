@@ -5,6 +5,7 @@
 <head>
 
     <% include partials/head %>
+
     
 </head>
 
@@ -24,7 +25,22 @@
             <li><a href="/workshops">Workshops</a></li>
             <li><a href="/talks">Talks</a></li>
             <li><a href="/proshow">ProShow</a></li>
-            <li><button class="login-button" href="/user/auth/google">Login / Register</button></li>
+            <!-- <li><a href="/user/auth/google">Login / Register with Google</a></li> -->
+            <!-- <li><a class="google-btn" href="/user/auth/google">Google+</a></li>
+            <li><a class="google-btn" href="/user/auth/facebook">Google+</a></li>
+            <li><a href="/user/auth/facebook">Login / Register with FaceBook</a></li> -->
+            <!-- <li><button class="login-button" href="/user/auth/google">Login / Register</button></li> -->
+            <li>Login / Register</li>
+			<li><button class="loginBtn loginBtn--google"  onclick="window.location.href='/user/auth/google'">
+			  Google+
+			</button></li>
+			 <li><button class="loginBtn loginBtn--facebook" onclick="window.location.href='/user/auth/facebook'">
+				Facebook
+			</button></li>
+			
+            <!-- <button class="regi_lo" id="rlbuttn" data-toggle="modal" data-target="#exampleModalCenter">Login|Register</button> -->
+                
+            
             <!--<li><button class="join-button" href="#">Join</button></li>-->
     </ul>
 </nav>

@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+<!--   <% include partials/head %> -->
+  <link rel="stylesheet" href="./css/common.css">
+  <link rel="stylesheet" href="./css/redirect.css">  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+        <link rel="stylesheet" href="/stylesheets/main.css">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous">
+
+
+</head>
+
+<body>
+  <div class="preloader">
+    <div class="preloader-ring"></div>
+  </div>
+
+   <nav class="navbar navbar-inverse navbar-fixed-top" >
+    <div class="container-fluid">
+            <div class="navbar-header">
+                <a href="index" class="navbar-brand">Camp</a>
+            </div>
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+            <ul class="nav navbar-nav navbar-right">
+                <!-- here we have used if statement beacuse it will work like this:
+                if the person is not logged In then navbar will show only signup or login In button
+                and if the person is logged in then navbar will show only logout button -->
+                   <% if(!currentUser){ %>
+                    <li><a href="/login">LOGIN</a></li>
+                    <li><a href="/register">SIGNUP</a></li>
+                   <% }else{ %>
+                    <li><a>Welcome! <%= currentUser.username %></a></li>
+                    <li><a href="/logout">LOGOUT</a></li>
+                   <% } %>  
+                </ul>
+            </div>
+            </div>
+    </nav>
+
+
+<div class="container">
+    <% if(success && success.length>0){ %>
+    <div class="alert alert-success" role="alert">
+        <%= success %>
+    </div>
+    <% } %>
+
+    <% if(error && error.length>0){ %>
+    <div class="alert alert-danger" role="alert">
+      <%= error %>
+    </div>
+    <% } %>
+</div>
+
+  <!-- three.js -->
+
+  <div id="webgl-output"></div>
+
+  <div class="bg-mask"></div>
+
+  <% if(valid){ %>
+
+  <h1 class="align-middle" style="text-align:center; padding-top:50vh">
+    <span> Redirecting, Please Wait...</span>
+  </h1>
+
+  <script>
+    // setTimeout(function () {
+    //       window.location = localStorage.getItem('tempURL');
+    //         }, 2000);
+    var urlRedirect = localStorage.getItem('tempURL');
+    if(urlRedirect === null || urlRedirect === undefined){
+      setTimeout(function () {
+            window.location.href = "https://plinth.in";
+              }, 2000);
+      
+    }
+    else {
+      setTimeout(function () {
+          window.location = urlRedirect;
+            }, 2000);
+          }
+    </script>
+
+  <% }else{ %>
+
+<div class="container">
+    <div class="row">
+        <h1 style="text-align: center">Login!</h1>
+        <div style="width: 30%; margin:30px auto;">
+            <form action="/login" method="POST">
+            
+                <div class="form-group">
+                  <input class="form-control" type="text" name="username" placeholder="username"  value="<%-user.name%>">
+                </div>
+                <div class="form-group">
+                    <input class="form-control" type="password" name="password" placeholder="password">
+                </div>
+                <div class="form-group">
+                    <button class="btn btn-lg btn-primary btn-block">submit!</button>
+                </div>
+            </form>
+            <a href="/camp">Go Back</a>
+        </div>
+            
+    </div>
+</div>    
+
+
+  <% } %>
+
+  <% include partials/footer %>
+
+  <script src="js/jquery.min.js"></script>
+  <script src="js/loginscript.js"></script>
+  <script src="js/scrollmagic.js"></script>
+  <script src="js/sphere.js"></script>
+  <script src="js/main.js"></script>
+  <script src="js/popper.min.js"></script>
+  <script src="js/bootstrap.min.js"></script>
+  <script src="js/redirect.js "></script>
+  <script>
+    var obj = {
+      Title: 'Register',
+      Url: 'https://plinth.in/user/redirect'
+    };
+    history.pushState(obj, obj.Title, obj.Url);
+  </script>
+  <script>
+    window.addEventListener('load', function () {
+
+      var el = document.querySelector('.preloader');
+      el.style.opacity = 1;
+
+      (function fade() {
+        if ((el.style.opacity -= 0.15) < 0) {
+          window.scrollTo(0, 0);
+          el.style.display = "none";
+          controls.redraw();
+          controls.rend();
+          controls.start();
+        } else {
+          requestAnimationFrame(fade);
+        }
+      })();
+    });
+  </script>
+  <script>
+    if (screen.width > 1024) {
+      function remove() {
+        var elem = document.getElementById('rlbuttn');
+        elem.parentNode.removeChild(elem);
+        return false;
+      }
+      remove();
+    }
+  </script>
+  <script>
+    var elem = document.getElementById('rlbuttn_menu');
+    if (elem != null) {
+      if (screen.width > 1024) {
+        function remove() {
+
+          elem.parentNode.removeChild(elem);
+          return false;
+        }
+        remove();
+      }
+    }
+  </script>
+  <script>
+    if (screen.width > 769) {
+      function remove() {
+        var elem = document.getElementById('rlbuttn');
+        elem.parentNode.removeChild(elem);
+        return false;
+      }
+      remove();
+    }
+  </script>
+  <script>
+    var elem = document.getElementById('faqbtn_rm');
+    if (elem != null) {
+      if (screen.width < 500) {
+        function remove() {
+
+          elem.parentNode.removeChild(elem);
+          return false;
+        }
+        remove();
+      }
+    }
+  </script>
+  <script>
+    if (screen.width > 500) {
+      function remove() {
+        var elem = document.getElementById('faq_rm');
+        elem.parentNode.removeChild(elem);
+        return false;
+      }
+      remove();
+    }
+  </script>
+  <script>
+    if (screen.width < 769) {
+      function remove() {
+        var elem = document.getElementById('seprate');
+        elem.parentNode.removeChild(elem);
+        return false;
+      }
+      remove();
+    }
+  </script>
+  <script>
+    if (screen.width > 769) {
+      function remove() {
+        var elem = document.getElementById('mobsep');
+        elem.parentNode.removeChild(elem);
+        return false;
+      }
+      remove();
+    }
+  </script>
+  <!-- Global site tag (gtag.js) - Google Analytics -->
+  <script async src="js/js.js"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+
+    function gtag() {
+      dataLayer.push(arguments);
+    }
+    gtag('js', new Date());
+    gtag('config', 'UA-125190547-1');
+  </script>
+
+</body>
+
+</html>
