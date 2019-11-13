@@ -9,11 +9,10 @@ var mongoose = require('mongoose');
 var passport = require('passport');
 var authenticate = require('./authenticate');
 
-
 // database connect
 var DBconfig = require('./config/dbconfig')
 mongoose.Promise = global.Promise;
-mongoose.connect('mongodb://localhost/plinth19', { useMongoClient: true });
+mongoose.connect(DBconfig.url, { useMongoClient: true });
 var db = mongoose.connection;
 db.on('error',console.error.bind(console, 'connection error:'));
 db.once('open', function(){
@@ -33,6 +32,8 @@ var ex = require('./routes/404');
 var app = express();
 
 //passport
+
+//require('./authenticate.js')(passport)
 
 app.use(passport.initialize());
 

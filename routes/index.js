@@ -3,6 +3,8 @@ var router = express.Router();
 var bodyParser = require('body-parser');
 var User = require('../schema/user');
 var Verify = require('./verify');
+var passport = require('passport');
+var Utils = require('./utils');
 
 /* GET home page. */
 router.get('/', Verify.verifyOrdinaryUser, function (req, res, next) {
@@ -39,7 +41,7 @@ router.get('/competitions', Verify.verifyOrdinaryUser, function (req, res, next)
 
     if (req.decoded.sub === "") {
         isLoggedIn = false;
-        res.render('competitions', {
+        res.render('competitioned', {
             "page": 'competitions',
             "isLoggedIn": isLoggedIn,
 
@@ -54,7 +56,7 @@ router.get('/competitions', Verify.verifyOrdinaryUser, function (req, res, next)
                 return done(err);
             // check to see if theres already a user with that email
             if (user) {
-                res.render('competitions', {
+                res.render('competitioned', {
                     "page": 'competitions',
                     "isLoggedIn": isLoggedIn,
                     "user": user,
