@@ -122,16 +122,19 @@ router.get('/auth/facebook/callback', function (req, res, next) {
 router.post('/user_register_complete', Verify.verifyOrdinaryUser, function (req, res) {
 
     console.log(req.decoded.sub);
-    var param_data = JSON.parse(req.body.postData);
+    console.log(req.body);
+   // var param_data = JSON.parse(req.body.postData);
     var update = {
-        phoneNumber: param_data.phoneNumber,
-        college: param_data.college,
-        year: param_data.year,
-        city: param_data.city,
-        gender: param_data.gender,
+
+        phoneNumber: req.body.contact_number,
+        college: req.body.institute,
+        year: req.body.user_year,
+        city: req.body.user_city,
+        gender: req.body.gender,
         events: ['init'],
         rEvents: ['init'],
-        valid: true,
+        valid: true
+        
     };
     console.log(update);
     User.findOneAndUpdate({
@@ -141,6 +144,7 @@ router.post('/user_register_complete', Verify.verifyOrdinaryUser, function (req,
     }, function (err, user) {
         if (err) {
             console.log('errr');
+            res.send("hello");
 
         }
         if (user) {
@@ -149,16 +153,23 @@ router.post('/user_register_complete', Verify.verifyOrdinaryUser, function (req,
                 secure: false
             });
             Utils.resSheet(user);
-            res.json({
-                status: true
-            });
+            // res.json({
+            //     status: true
+            // });
+            // res.send("success");
+            res.redirect('/profile');
+            return;
+            
+            
+        } else {
+            // res.json({
+            //     status: false
+            // });
+            res.render("redirect.ejs");
+            //res.redirect('/');
+            
             return;
 
-        } else {
-            res.json({
-                status: false
-            });
-            return;
 
         }
     });

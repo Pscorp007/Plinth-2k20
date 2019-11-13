@@ -3,6 +3,8 @@ var router = express.Router();
 var bodyParser = require('body-parser');
 var User = require('../schema/user');
 var Verify = require('./verify');
+var passport = require('passport');
+var Utils = require('./utils');
 
 /* GET home page. */
 router.get('/', Verify.verifyOrdinaryUser, function (req, res, next) {
